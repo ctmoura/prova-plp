@@ -1,0 +1,164 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>br.cin.ufpe</groupId>
+	<artifactId>extensao-li1</artifactId>
+	<version>1.0.0</version>
+	<name>extensao-li1</name>
+	<description>
+		Disciplina: (IN1007) Paradigmas de Linguagens de Programação | Prof: Augusto Sampaio | Cin/UFPE - 2023.
+		Questão 05 da Prova de 2013
+	</description>
+	<developers>
+		<developer>
+			<name>Cleber Tavares de Moura</name>
+			<email>ctm@cin.ufpe.br</email>
+		</developer>
+		<developer>
+			<name>João Tiago Ferreira Soares Pessoa</name>
+			<email>jtfsp@cin.ufpe.br</email>
+		</developer>
+	</developers>
+
+	<properties>
+		<version.javacc-maven-plugin>3.0.1</version.javacc-maven-plugin>
+		<maven.compiler.target>1.8</maven.compiler.target>
+		<maven.compiler.source>1.8</maven.compiler.source>
+	</properties>
+
+	<dependencies>
+		<!-- https://mvnrepository.com/artifact/net.java.dev.javacc/javacc -->
+		<dependency>
+			<groupId>
+				net.java.dev.javacc</groupId>
+			<artifactId>javacc</artifactId>
+			<version>7.0.10</version>
+		</dependency>
+
+		<dependency>
+			<groupId>
+				junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.12</version>
+			<scope>test</scope>
+		</dependency>
+
+	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>
+					org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>
+					3.11.0</version>
+			</plugin>
+			<plugin>
+				<groupId>
+					org.apache.maven.plugins</groupId>
+				<artifactId>maven-site-plugin</artifactId>
+				<version>4.0.0-M8</version>
+			</plugin>
+			<plugin>
+			  <groupId>org.apache.maven.plugins</groupId>
+			  <artifactId>maven-scm-publish-plugin</artifactId>
+			  <version>3.2.1</version>
+			  <configuration>
+			    <scmBranch>gh-pages</scmBranch>
+			  </configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>
+					javacc-maven-plugin</artifactId>
+				<version>
+					${version.javacc-maven-plugin}</version>
+				<executions>
+					<execution>
+						<id>javacc</id>
+						<goals>
+							<goal>javacc</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<outputDirectory>
+						${project.basedir}/src/main/java</outputDirectory>
+				</configuration>
+			</plugin>
+		</plugins>
+		<pluginManagement>
+			<plugins>
+				<!--This plugin's configuration is used to store Eclipse m2e settings 
+					only. It has no influence on the Maven build itself. -->
+				<plugin>
+					<groupId>
+						org.eclipse.m2e</groupId>
+					<artifactId>lifecycle-mapping</artifactId>
+					<version>
+						1.0.0</version>
+					<configuration>
+						<lifecycleMappingMetadata>
+							<pluginExecutions>
+								<pluginExecution>
+									<pluginExecutionFilter>
+										<groupId>
+											org.codehaus.mojo
+										</groupId>
+										<artifactId>
+											javacc-maven-plugin
+										</artifactId>
+										<versionRange>
+											[3.0.1,)
+										</versionRange>
+										<goals>
+											<goal>
+												javacc</goal>
+										</goals>
+									</pluginExecutionFilter>
+									<action>
+										<ignore></ignore>
+									</action>
+								</pluginExecution>
+							</pluginExecutions>
+						</lifecycleMappingMetadata>
+					</configuration>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+	</build>
+	<reporting>
+		<plugins>
+			<plugin>
+				<groupId>
+					org.apache.maven.plugins</groupId>
+				<artifactId>maven-javadoc-plugin</artifactId>
+				<version>
+					3.5.0</version>
+				<configuration>
+					<doclint>all,-missing</doclint>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>
+					org.codehaus.mojo</groupId>
+				<artifactId>javacc-maven-plugin</artifactId>
+				<version>
+					${version.javacc-maven-plugin}</version>
+				<configuration>
+					<outputDirectory>
+						${project.basedir}/docs</outputDirectory>
+				</configuration>
+			</plugin>
+		</plugins>
+	</reporting>
+
+	<distributionManagement>
+		<site>
+			<id>github</id>
+			<url>scm:git:git@github.com:joaotiagofsp/optparams.git</url>
+		</site>
+	</distributionManagement>
+</project>
