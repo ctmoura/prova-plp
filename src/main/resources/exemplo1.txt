@@ -1,0 +1,16 @@
+{
+var x1 = 1, var x2 = 2;
+
+x1, x2 := 3;
+
+write("x1 = ");
+write(x1);
+write("x2 = ");
+write(x2);
+
+if (x1 == x2) then
+  write("valores iguais")
+else
+  write("valores diferentes")
+  
+}

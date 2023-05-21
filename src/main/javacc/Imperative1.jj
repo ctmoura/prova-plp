@@ -384,6 +384,18 @@ Atribuicao PAtribuicao() :
 	}
 }
 
+AtribuicaoMultipla PAtribuicaoMultipla() :
+{
+	List listIds;
+	Expressao exp;
+}
+{
+	listIds = PIdList() < ATTRIB > exp = PExpressao()
+	{
+		return new AtribuicaoMultipla(listIds, exp);
+	}
+}
+
 Id PId() :
 {
 	Token token;
@@ -393,6 +405,32 @@ Id PId() :
 	{
 		return new Id(token.toString());
 	}
+}
+
+
+// Adicionando estrutura para representar uma lista de Id.
+List PIdList() :
+{
+  List retorno = null;
+  Id id;
+}
+{
+  (
+    id = PId()
+    {
+      retorno = new ArrayList();
+      retorno.add(id);
+    }
+    (
+      < COMMA > id = PId()
+      {
+        retorno.add(id);
+      }
+    )*
+  )
+  {
+    return retorno;
+  }
 }
 
 
@@ -636,7 +674,8 @@ Comando PComandoSimples() :
 {
     (
     	retorno = PSkip()
-      | retorno = PAtribuicao()
+//      | retorno = PAtribuicao()
+      | retorno = PAtribuicaoMultipla()
       | retorno = PComandoDeclaracao()
       | retorno = PWhile()
       | retorno = PIfThenElse()
