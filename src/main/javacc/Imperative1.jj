@@ -422,7 +422,8 @@ List PIdList() :
       retorno.add(id);
     }
     (
-      < COMMA > id = PId()
+      LOOKAHEAD (< ATTRIB > PId())
+      < ATTRIB > id = PId()
       {
         retorno.add(id);
       }
