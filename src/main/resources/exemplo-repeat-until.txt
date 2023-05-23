@@ -1,0 +1,7 @@
+{
+var i=100; 
+repeat
+	i := (i + 1);
+	write(i)	
+until not (i==110)
+}
