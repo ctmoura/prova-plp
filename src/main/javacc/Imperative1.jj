@@ -124,6 +124,8 @@ TOKEN : /* TOKENS DE IMPERATIVA 1 */
 | < IF: "if" >
 | < THEN: "then" >
 | < ELSE: "else" >
+| < REPEAT: "repeat" > 
+| < UNTIL: "until" > 
 }
 
 TOKEN : /* TOKENS DE IMPERATIVA 2 */
@@ -666,6 +668,21 @@ Expressao PExpressao() :
 	}
 }
 
+Repeat PRepeat() :
+{
+	Expressao expressao;
+	Comando comando;
+}
+{
+	<REPEAT>
+		comando = PComando()		
+	<UNTIL>
+		expressao = PExpressao()
+
+	{return new Repeat(comando, expressao);}
+}
+
+
 /*  ADICIONADO OU MODIFICADO DA Imperativa1 PARA A Imperativa2  */
 
 Comando PComandoSimples() :
@@ -681,6 +698,7 @@ Comando PComandoSimples() :
       | retorno = PWhile()
       | retorno = PIfThenElse()
       | retorno = PIO()
+	  | retorno = PRepeat()
       | <LPAREN> retorno = PComando() <RPAREN>
    	)
     {
